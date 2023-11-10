@@ -4,7 +4,7 @@
   "description": "Static website [ara.team](https://ara.team/) hosted on [Cloudflare Pages](https://pages.cloudflare.com/).",
   "main": "index.js",
   "scripts": {
-    "pages:deploy": "wrangler pages deploy ./public_html --project-name ara.team"
+    "pages:deploy": "wrangler pages deploy ./public_html --project-name ara-team"
   },
   "repository": {
     "type": "git",
