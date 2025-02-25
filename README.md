@@ -5,6 +5,20 @@ Static website [ara.team](https://ara.team/) hosted on [Cloudflare Pages](https:
 Notes
 
 ```
+https://developers.cloudflare.com/pages/get-started/c3/
+
+$ yarn create cloudflare (with yarn 1 installed globally)
+ara-team, sets the local directory and pages project name in the dashboard; use hyphen, not space
+Framework Starter, category
+Nuxt, framework
+y, yes to install nuxi@3; didn't get asked the second time through these steps
+no, don't use git for version control; going to drag created files into this existing repository
+yes, deploy to cloudflare; add domain after that in the dashboard
+```
+
+Previous Notes
+
+```
 desktop browser, github.com, new repo, example.com name, public or private
 yes readme, node gitignore, gpl3 license
 
