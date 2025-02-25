@@ -7,7 +7,7 @@
 <div>
 
 <code>
-welcome to ara.team, now powered by Nuxt, v2025feb25a
+welcome to ara.team, now powered by Nuxt, v2025feb25b
 </code>
 
 </div>

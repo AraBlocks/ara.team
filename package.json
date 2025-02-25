@@ -1,7 +1,7 @@
 {
   "name": "ara.team",
   "description": "Static website [ara.team](https://ara.team/) hosted on [Cloudflare Pages](https://pages.cloudflare.com/).",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-only",
   "version": "1.0.0",
 	"type": "module",
 	"private": true,
