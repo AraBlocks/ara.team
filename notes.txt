@@ -1,0 +1,38 @@
+
+ara.team ~ rough notes and scratchpad
+
+## cloudflare and nuxt
+
+https://developers.cloudflare.com/pages/get-started/c3/
+
+$ yarn create cloudflare (with yarn 1 installed globally)
+ara-team, sets the local directory and pages project name in the dashboard; use hyphen, not space
+Framework Starter, category
+Nuxt, framework
+y, yes to install nuxi@3; didn't get asked the second time through these steps
+no, don't use git for version control; going to drag created files into this existing repository
+yes, deploy to cloudflare; add domain after that in the dashboard
+
+## tailwind
+
+https://tailwindcss.nuxtjs.org/getting-started/installation
+$ yarn add -D @nuxtjs/tailwindcss
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
