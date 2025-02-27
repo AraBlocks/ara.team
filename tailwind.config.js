@@ -1,3 +1,4 @@
+//this file is tailwind.config.js
 module.exports = {
 	//chat says now that we have our own tailwind config file, we have to add this list to help it scan our project files for class names
 	content: [
@@ -19,7 +20,7 @@ module.exports = {
 					'Arial',//widely available fallback
 					'sans-serif',//generic fallback
 				],
-				mono: [
+				mono: [//you can confirm these work by adding 'Papyrus' to the start, lol
 					'ui-monospace',//modern UI monospaced font on some systems
 					'SFMono-Regular',//default monospaced font on macs and iphones
 					'Consolas',//standard on Windows

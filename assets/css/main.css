@@ -1,4 +1,4 @@
-/* this file, assets/css/main.css, is where you can still get styles to actually cascade, like a whole sheet of them ;) */
+/* this file is assets/css/main.css, made to get styles to actually cascade, like a whole sheet of them ;) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
