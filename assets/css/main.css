@@ -1,0 +1,19 @@
+/* this file, assets/css/main.css, is where you can still get styles to actually cascade, like a whole sheet of them ;) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body { /* styling <body> here will also reach down to <div>, <p>, <h1> and the others, and <span> */
+		@apply font-sans;
+	}
+	code, pre {
+		@apply font-mono;
+	}
+	/*
+	should not be necessary, but here's how to explicitly ensure form controls inherit the font
+	button, input, textarea, select {
+		font: inherit;
+	}
+	*/
+}

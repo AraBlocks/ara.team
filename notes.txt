@@ -18,20 +18,31 @@ yes, deploy to cloudflare; add domain after that in the dashboard
 https://tailwindcss.nuxtjs.org/getting-started/installation
 $ yarn add -D @nuxtjs/tailwindcss
 
+and then you did have to add this manually to nuxt.config.ts:
+	modules: [
+		'nitro-cloudflare-dev',
+		'@nuxtjs/tailwindcss',//from nuxt tailwind
+	],
+
+## fonts
+
+
+
+https://fonts.google.com/noto/specimen/Noto+Sans
+
+
+https://abcdinamo.com/typefaces/ginto-rounded
 
 
 
 
 
+oh, also, let's say the browser needs to display a character that is not a part of ginto rounded
+will it fall back to noto sans, even on text that is styled to show ginto rounded?
 
 
 
-
-
-
-
-
-
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
 
 

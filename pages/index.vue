@@ -4,10 +4,10 @@
 
 </script>
 <template>
-<div>
+<div class="bg-gray-100">
 
-<code>
-welcome to ara.team, now powered by Nuxt, v2025feb26a
+<code class="text-indigo-500">
+welcome to ara.team, now powered by Nuxt, v2025feb26c
 </code>
 
 </div>
