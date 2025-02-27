@@ -10,8 +10,13 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			fontFamily: {
+			fontFamily: {//you can confirm these work by adding 'Papyrus' to the start of any list, lol
 				sans: [
+
+					//google fonts
+					'"Noto Sans"',
+
+					//system fonts
 					'-apple-system',//for iphone and mac, leads to San Francisco, Apple's 2014 replacement for Helvetica Neue
 					'BlinkMacSystemFont',//for Chrome on apple devices, also leads to San Francisco
 					'"Segoe UI"',//for Windows
@@ -20,7 +25,12 @@ module.exports = {
 					'Arial',//widely available fallback
 					'sans-serif',//generic fallback
 				],
-				mono: [//you can confirm these work by adding 'Papyrus' to the start, lol
+				mono: [
+
+					//google fonts
+					'"Noto Sans Mono"',
+
+					//system fonts
 					'ui-monospace',//modern UI monospaced font on some systems
 					'SFMono-Regular',//default monospaced font on macs and iphones
 					'Consolas',//standard on Windows

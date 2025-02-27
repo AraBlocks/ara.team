@@ -15,4 +15,14 @@ export default defineNuxtConfig({
 	css: [
 		'~/assets/css/main.css',//for tailwind to get styles to cascade
 	],
+	app: {
+		head: {
+			link: [
+				{
+					rel: 'stylesheet',
+					href: 'https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Sans+Mono:wght@400;700&display=swap',
+				},
+			],
+		},
+	},
 })
