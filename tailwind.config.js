@@ -15,8 +15,13 @@ module.exports = {
 					//packaged fonts
 					'"Ginto Rounded"',
 
-					//google fonts
-					'"Noto Sans"',
+					//google fonts with lots of regions to avoid browser fallback or tofu
+					'"Noto Sans"',//primary for Latin, Cyrillic, Greek, Vietnamese
+					'"Noto Sans Arabic"',//for Arabic glyphs
+					'"Noto Sans Devanagari"',//for Hindi, Marathi, etc.
+					'"Noto Sans JP"',//for Japanese
+					'"Noto Sans KR"',//for Korean
+					'"Noto Sans SC"',//for simplified Chinese
 
 					//system fonts
 					'-apple-system',//for iphone and mac, leads to San Francisco, Apple's 2014 replacement for Helvetica Neue

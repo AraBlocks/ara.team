@@ -18,10 +18,18 @@ export default defineNuxtConfig({
 	app: {
 		head: {
 			link: [
-				{
-					rel: 'stylesheet',
-					href: 'https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Sans+Mono:wght@400;700&display=swap',
-				},
+				//europe sans serif and monospaced
+				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap&subset=latin,latin-ext,cyrillic,greek,vietnamese'},//includes Hungarian, Polish, Turkish
+				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&display=swap&subset=latin'},
+
+				//asia san serif
+				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap'},//Japanese
+				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'},//Korean
+				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap'},//simplified Chinese
+
+				//more
+				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap'},//Arabic
+				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap'},//Devanagari (Hindi, Marathi, more)
 			],
 		},
 	},

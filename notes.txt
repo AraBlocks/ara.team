@@ -26,24 +26,17 @@ and then you did have to add this manually to nuxt.config.ts:
 
 ## fonts
 
+./nuxt.config.ts
+./tailwind.config.js
+./assets/css/main.css
+./pages/index.vue
 
-
-https://fonts.google.com/noto/specimen/Noto+Sans
-
-
+1 packaged
 https://abcdinamo.com/typefaces/ginto-rounded
 
+2 linked
+https://fonts.google.com/noto/specimen/Noto+Sans
+and added a bunch of global options, which will prevent tofu but may slow down the load time
 
-
-
-
-oh, also, let's say the browser needs to display a character that is not a part of ginto rounded
-will it fall back to noto sans, even on text that is styled to show ginto rounded?
-
-
-
+3 preinstalled
 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-
-
-
-
