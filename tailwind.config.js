@@ -12,6 +12,8 @@ module.exports = {
 		extend: {
 			fontFamily: {//you can confirm these work by adding 'Papyrus' to the start of any list, lol
 				sans: [
+					//packaged fonts
+					'"Ginto Rounded"',
 
 					//google fonts
 					'"Noto Sans"',

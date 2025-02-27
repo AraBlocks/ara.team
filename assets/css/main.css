@@ -1,4 +1,13 @@
 /* this file is assets/css/main.css, made to get styles to actually cascade, like a whole sheet of them ;) */
+
+@font-face {
+	font-family: "Ginto Rounded";
+	src: url('~/assets/fonts/ABCGintoRoundedVariableVF-Trial.woff2') format('woff2');
+	font-weight: 100 900;/* adjust the weight range if necessary – here it's set from 100 to 900 */
+	font-display: swap;
+}
+
+/* tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
