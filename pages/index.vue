@@ -16,7 +16,7 @@ and a line of text outside of any tags other than the template's div
 <template>
 <div>
 
-ara.team
+Hello, World!
 
 </div>
 </template>
