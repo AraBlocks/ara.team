@@ -17,7 +17,7 @@
 		@apply font-sans;
 	}
 	code, pre {
-		@apply font-mono;
+		@apply font-mono text-gray-700;
 	}
 	/*
 	should not be necessary, but here's how to explicitly ensure form controls inherit the font
@@ -25,4 +25,10 @@
 		font: inherit;
 	}
 	*/
+	a {
+		@apply underline text-gray-700;
+	}
+	p + p {
+		@apply mt-1;
+	}
 }

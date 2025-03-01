@@ -24,89 +24,56 @@
 - bg-white, rounded, border, shadow-sm: visual styling
 - p-4: internal padding (B) -->
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
-<h2 class="text-lg font-bold mb-2">Card 1</h2>
-<p>This is some sample text in card 1. It may be short or long, and the card will adjust its height accordingly.</p>
 
+<p>$ARA is <code>0xa92e7c...ef7df5</code>. Always check the contract address!</p>
 
-
-
-
-$ARA is 0xa92E7c82B11d10716aB534051B271D2f6aEf7Df5 Always check the contract address!
-
-
-
-
-
-Ara directly connects creators and fans, enabling distribution and payment without platform fees and limits.
-
-Liquidity mining runs 2021-July-24 00:00:00 UTC through 2025-May-23
-(1) Get ARA in the 🦊 MetaMask mobile app;
-https://arablocks.medium.com/ara-available-now-on-metamask-198ec078c997
-(2) Pool ARA with USDC in 🍣 SushiSwap to get SLP;
-https://app.sushi.com/analytics/pools/0x81ef0c70fa76c8e7563cb26ee34a2e7f2a77c410?chainId=1
-(3) Stake SLP in ARA’s 💦 Liquidity Mining Gysr to earn ARA;
-https://app.gysr.io/pool/0x05dff8d71cd222e09bb71e44e0be7cc8f03a07c9
-(4) Stake ARA for ARA in the 💎 Hodl Gysr
-https://app.gysr.io/pool/0x13088d77e86e87ad2f77608814f609ea96ca7a87
-🚜 Announcement and full guide:
-https://arablocks.medium.com/liquidity-mining-ara-announcement-important-links-and-step-by-step-guide-a42dc52fbf23
-
-💰 CoinMarketCap: https://coinmarketcap.com/currencies/ara-blocks
-🦎 CoinGecko: https://www.coingecko.com/en/coins/ara-token
-🔍 Etherscan: https://etherscan.io/token/0xa92e7c82b11d10716ab534051b271d2f6aef7df5
-❄️ DEXTools for SushiSwap pair: https://www.dextools.io/app/sushiswap/pair-explorer/0x81ef0c70fa76c8e7563cb26ee34a2e7f2a77c410
-❄️ (Earlier) DEXTools for Uniswap pair: https://www.dextools.io/app/uniswap/pair-explorer/0x6d2f0fabb11ea0b1f4416711758e86e86fa7c154
-
-🦄 (Earlier) Uniswap v2 ARA/ETH liquidity pool: https://v2.info.uniswap.org/token/0xa92e7c82b11d10716ab534051b271d2f6aef7df5
-🦄 (Earlier) Uniswap v3 ARA/ETH liquidity pool:
-https://info.uniswap.org/#/pools/0x0bc1a6edafa658e6501d2107d8f31d490752b94b
-
-🌐 Official Ara website: https://ara.team/
-⚡️ Ara DAO: https://snapshot.org/#/aradao.eth
-📖 Ara Whitepaper: https://github.com/AraBlocks/papers/blob/master/ara-whitepaper-en.pdf
-🗺 Ara Roadmap: https://docs.rad.live/rad/ara/white-paper/overall-roadmap
-🖥 Ara File Manager desktop app: https://github.com/AraBlocks/ara-file-manager/releases
-📧 Partnerships & Questions: hello@ara.one
-
-✈️Telegram: https://t.me/arablocks
-🎮Discord: https://discord.gg/6ZMVgTVTGy
-💾GitHub: https://github.com/AraBlocks
-🐦Twitter: https://www.twitter.com/arablocks
-⚫️Medium: https://arablocks.medium.com/
-📷Instagram: https://www.instagram.com/arablocks
-🟦Facebook: https://www.facebook.com/AraBlocks
-💼Linkedin: https://www.linkedin.com/company/ara-blocks
-🌲Linktree: https://linktr.ee/arablocks
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>Ara directly connects creators and fans, enabling distribution and payment without platform fees and limits.</p>
 </div>
 
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
-<h2 class="text-lg font-bold mb-2">Card 2</h2>
-<p>
-Card 2 contains a bit more text to demonstrate how cards of varying heights are managed.
-The content wraps naturally within the card, and the card grows taller as needed.
-</p>
+<p>Liquidity mining runs <b>2021-July-24 00:00:00 UTC</b> through <b>2025-May-23</b></p>
+<p>1 Get ARA in the <a href="https://arablocks.medium.com/ara-available-now-on-metamask-198ec078c997">🦊 MetaMask</a> mobile app;</p>
+
+<p>2 Pool ARA with USDC in <a href="https://app.sushi.com/analytics/pools/0x81ef0c70fa76c8e7563cb26ee34a2e7f2a77c410?chainId=1">🍣 SushiSwap</a> to get SLP;</p>
+
+<p>3 Stake SLP in ARA’s <a href="https://app.gysr.io/pool/0x05dff8d71cd222e09bb71e44e0be7cc8f03a07c9">💦 Liquidity Mining Gysr</a> to earn ARA;</p>
+
+<p>4 Stake ARA for ARA in the <a href="https://app.gysr.io/pool/0x13088d77e86e87ad2f77608814f609ea96ca7a87">💎 Hodl Gysr</a></p>
+
+<p><a href="https://arablocks.medium.com/liquidity-mining-ara-announcement-important-links-and-step-by-step-guide-a42dc52fbf23">🚜 Announcement and full guide</a></p>
 </div>
 
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
-<h2 class="text-lg font-bold mb-2">Card 3</h2>
-<p>
-Card 3 is here. Additional cards can be added in the same way.
-</p>
+<p><a href="https://coinmarketcap.com/currencies/ara-blocks">💰 CoinMarketCap</a></p>
+<p><a href="https://www.coingecko.com/en/coins/ara-token">🦎 CoinGecko</a></p>
+<p><a href="https://etherscan.io/token/0xa92e7c82b11d10716ab534051b271d2f6aef7df5">🔍 Etherscan</a></p>
+<p><a href="https://www.dextools.io/app/sushiswap/pair-explorer/0x81ef0c70fa76c8e7563cb26ee34a2e7f2a77c410">❄️ DEXTools for SushiSwap pair</a></p>
+<p><a href="https://www.dextools.io/app/uniswap/pair-explorer/0x6d2f0fabb11ea0b1f4416711758e86e86fa7c154">❄️ (Earlier) DEXTools for Uniswap pair</a></p>
+
+<p><a href="https://v2.info.uniswap.org/token/0xa92e7c82b11d10716ab534051b271d2f6aef7df5">🦄 (Earlier) Uniswap v2 ARA/ETH liquidity pool</a></p>
+<p><a href="https://info.uniswap.org/#/pools/0x0bc1a6edafa658e6501d2107d8f31d490752b94b">🦄 (Earlier) Uniswap v3 ARA/ETH liquidity pool</a></p>
+</div>
+
+<div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
+<p><a href="https://ara.team/">🌐 Official Ara webpage</a> you're on it! <code>https://ara.team</code></p>
+<p><a href="https://snapshot.org/#/aradao.eth">⚡️ Ara DAO</a></p>
+<p><a href="https://github.com/AraBlocks/papers/blob/master/ara-whitepaper-en.pdf">📖 Ara Whitepaper</a></p>
+<p><a href="https://github.com/AraBlocks/ara-file-manager/releases">🖥 Ara File Manager desktop app</a></p>
+</div>
+
+<div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
+<p><a href="https://t.me/arablocks">✈️ Telegram</a></p>
+<p><a href="https://discord.gg/6ZMVgTVTGy">🎮 Discord</a></p>
+<p><a href="https://github.com/AraBlocks">💾 GitHub</a></p>
+</div>
+
+<div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
+<p><a href="https://www.twitter.com/arablocks">𝕏 X née Twitter</a></p>
+<p><a href="https://arablocks.medium.com/">⚫️ Medium</a></p>
+<p><a href="https://www.instagram.com/arablocks">📷 Instagram</a></p>
+<p><a href="https://www.facebook.com/AraBlocks">🟦 Facebook</a></p>
+<p><a href="https://www.linkedin.com/company/ara-blocks">💼 Linkedin</a></p>
+<p><a href="https://linktr.ee/arablocks">🌲 Linktree</a></p>
 </div>
 	
 </div>
