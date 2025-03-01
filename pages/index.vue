@@ -55,7 +55,7 @@
 </div>
 
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
-<p><a href="https://ara.team/">🌐 Official Ara webpage</a> you're on it! <code>https://ara.team</code></p>
+<p><a href="https://ara.team/">🌐 Official Ara webpage</a> you're on it! <i><code>https://ara.team</code></i></p>
 <p><a href="https://snapshot.org/#/aradao.eth">⚡️ Ara DAO</a></p>
 <p><a href="https://github.com/AraBlocks/papers/blob/master/ara-whitepaper-en.pdf">📖 Ara Whitepaper</a></p>
 <p><a href="https://github.com/AraBlocks/ara-file-manager/releases">🖥 Ara File Manager desktop app</a></p>
@@ -74,6 +74,10 @@
 <p><a href="https://www.facebook.com/AraBlocks">🟦 Facebook</a></p>
 <p><a href="https://www.linkedin.com/company/ara-blocks">💼 Linkedin</a></p>
 <p><a href="https://linktr.ee/arablocks">🌲 Linktree</a></p>
+</div>
+
+<div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
+<p>So actually this website doesn't use cookies 🍪</p>
 </div>
 	
 </div>
