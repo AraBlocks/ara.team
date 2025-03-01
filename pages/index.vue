@@ -3,7 +3,7 @@
 
 </script>
 <template>
-<div class="p-4 columns-1 sm:columns-2 lg:columns-3" style="column-gap: 1rem;">
+<div class="p-4 columns-1 lg:columns-2 xl:columns-3" style="column-gap: 1rem;">
 <!-- ^Container:
 - p-4: outer padding (A)
 - columns-1 sm:columns-2 lg:columns-3: responsive column count
@@ -26,6 +26,72 @@
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
 <h2 class="text-lg font-bold mb-2">Card 1</h2>
 <p>This is some sample text in card 1. It may be short or long, and the card will adjust its height accordingly.</p>
+
+
+
+
+
+$ARA is 0xa92E7c82B11d10716aB534051B271D2f6aEf7Df5 Always check the contract address!
+
+
+
+
+
+Ara directly connects creators and fans, enabling distribution and payment without platform fees and limits.
+
+Liquidity mining runs 2021-July-24 00:00:00 UTC through 2025-May-23
+(1) Get ARA in the 🦊 MetaMask mobile app;
+https://arablocks.medium.com/ara-available-now-on-metamask-198ec078c997
+(2) Pool ARA with USDC in 🍣 SushiSwap to get SLP;
+https://app.sushi.com/analytics/pools/0x81ef0c70fa76c8e7563cb26ee34a2e7f2a77c410?chainId=1
+(3) Stake SLP in ARA’s 💦 Liquidity Mining Gysr to earn ARA;
+https://app.gysr.io/pool/0x05dff8d71cd222e09bb71e44e0be7cc8f03a07c9
+(4) Stake ARA for ARA in the 💎 Hodl Gysr
+https://app.gysr.io/pool/0x13088d77e86e87ad2f77608814f609ea96ca7a87
+🚜 Announcement and full guide:
+https://arablocks.medium.com/liquidity-mining-ara-announcement-important-links-and-step-by-step-guide-a42dc52fbf23
+
+💰 CoinMarketCap: https://coinmarketcap.com/currencies/ara-blocks
+🦎 CoinGecko: https://www.coingecko.com/en/coins/ara-token
+🔍 Etherscan: https://etherscan.io/token/0xa92e7c82b11d10716ab534051b271d2f6aef7df5
+❄️ DEXTools for SushiSwap pair: https://www.dextools.io/app/sushiswap/pair-explorer/0x81ef0c70fa76c8e7563cb26ee34a2e7f2a77c410
+❄️ (Earlier) DEXTools for Uniswap pair: https://www.dextools.io/app/uniswap/pair-explorer/0x6d2f0fabb11ea0b1f4416711758e86e86fa7c154
+
+🦄 (Earlier) Uniswap v2 ARA/ETH liquidity pool: https://v2.info.uniswap.org/token/0xa92e7c82b11d10716ab534051b271d2f6aef7df5
+🦄 (Earlier) Uniswap v3 ARA/ETH liquidity pool:
+https://info.uniswap.org/#/pools/0x0bc1a6edafa658e6501d2107d8f31d490752b94b
+
+🌐 Official Ara website: https://ara.team/
+⚡️ Ara DAO: https://snapshot.org/#/aradao.eth
+📖 Ara Whitepaper: https://github.com/AraBlocks/papers/blob/master/ara-whitepaper-en.pdf
+🗺 Ara Roadmap: https://docs.rad.live/rad/ara/white-paper/overall-roadmap
+🖥 Ara File Manager desktop app: https://github.com/AraBlocks/ara-file-manager/releases
+📧 Partnerships & Questions: hello@ara.one
+
+✈️Telegram: https://t.me/arablocks
+🎮Discord: https://discord.gg/6ZMVgTVTGy
+💾GitHub: https://github.com/AraBlocks
+🐦Twitter: https://www.twitter.com/arablocks
+⚫️Medium: https://arablocks.medium.com/
+📷Instagram: https://www.instagram.com/arablocks
+🟦Facebook: https://www.facebook.com/AraBlocks
+💼Linkedin: https://www.linkedin.com/company/ara-blocks
+🌲Linktree: https://linktr.ee/arablocks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
