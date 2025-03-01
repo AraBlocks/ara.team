@@ -19,6 +19,21 @@ and a line of text outside of any tags other than the template's div
 		 - p-4: outer padding (A)
 		 - columns-1 sm:columns-2 lg:columns-3: responsive column count
 		 - inline style for column-gap (A) -->
+
+
+
+	<!-- A fixed-size SVG circle that doesn't fill the column width -->
+	<div class="break-inside-avoid mb-4">
+	<!-- 
+	The SVG is set as inline-block so that it only takes up its intrinsic width.
+	You can also use Tailwind's width and height classes (w-24, h-24 for example)
+	if you prefer.
+	-->
+	<svg class="inline-block" width="180" height="180" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<circle cx="50" cy="50" r="50" fill="#4F46E5" />
+	</svg>
+	</div>
+
 	
 	<!-- Each card:
 			 - break-inside-avoid: prevents a card from being split between columns
@@ -44,6 +59,16 @@ and a line of text outside of any tags other than the template's div
 			Card 3 is here. Additional cards can be added in the same way.
 		</p>
 	</div>
+
+
+
+
+
+
+
+
+
+
 
 	<!-- You can add as many cards as needed -->
 	
