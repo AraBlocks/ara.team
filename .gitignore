@@ -25,6 +25,7 @@ stats*.html
 *.vars
 env.js
 card.js
+!.env.example
 
 #lock files; forgetting to delete one on a new os would really mess up the build
 package-lock.json

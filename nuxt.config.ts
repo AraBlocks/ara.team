@@ -33,4 +33,20 @@ export default defineNuxtConfig({
 			],
 		},
 	},
+	runtimeConfig: {
+		// Runtime config maps environment variables from .env file to config properties
+		// Environment variables must be prefixed with NUXT_ and use SCREAMING_SNAKE_CASE
+		// They map to camelCase properties here:
+		// .env file:                  maps to:
+		// NUXT_AUTH_SECRET        -> authSecret
+		// NUXT_DISCORD_CLIENT_ID  -> discordClientId
+		authSecret: undefined,
+		discordClientId: undefined,
+		discordClientSecret: undefined,
+		twitterClientId: undefined,
+		twitterClientSecret: undefined,
+		public: {
+			// Public runtime config goes here (available client-side)
+		}
+	}
 })
