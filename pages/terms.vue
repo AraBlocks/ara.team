@@ -9,12 +9,12 @@
 
 <div class="myedges">
 <p>
-By accessing or using this site you agree to the
+By accessing or using this site, you agree to the
 <NuxtLink to="#terms">Terms and Conditions</NuxtLink>,{{' '}}
 <NuxtLink to="#privacy">Privacy Notice</NuxtLink>,{{' '}}
 <NuxtLink to="#cookies">Cookie Info</NuxtLink>,{{' '}}
 <NuxtLink to="#sms">SMS and MMS Terms</NuxtLink>,{{' '}}
-and any other policies set out below.
+and any other policies and notices listed below.
 </p>
 </div>
 
