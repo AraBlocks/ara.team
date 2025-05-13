@@ -78,6 +78,12 @@
 
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
 <p>So actually this website doesn't use cookies 🍪</p>
+<p>
+<NuxtLink to="/terms">Terms and Conditions</NuxtLink>{{' '}}
+<NuxtLink to="/terms#privacy">Privacy Notice</NuxtLink>{{' '}}
+<NuxtLink to="/terms#cookies">Cookie Info</NuxtLink>{{' '}}
+<NuxtLink to="/terms#sms">SMS and MMS Terms</NuxtLink>
+</p>
 </div>
 	
 </div>

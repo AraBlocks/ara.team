@@ -1,5 +1,9 @@
 //this file is tailwind.config.js
-module.exports = {
+
+import defaultTheme from 'tailwindcss/defaultTheme'
+
+export default {
+
 	//chat says now that we have our own tailwind config file, we have to add this list to help it scan our project files for class names
 	content: [
 		'./components/**/*.{vue,js,ts,jsx,tsx}',
@@ -44,6 +48,14 @@ module.exports = {
 					'"Liberation Mono"',//common on Linux distributions
 					'"Courier New"',//widely available fallback
 					'monospace',//generic fallback
+				],
+				roboto: [//our own name to create the tailwind style font-roboto
+
+					//google fonts
+					'Roboto',
+
+					//system fonts, an easier way to get all the defaults
+					...defaultTheme.fontFamily.sans,
 				],
 			},
 		},

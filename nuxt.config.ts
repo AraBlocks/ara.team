@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 	app: {
 		head: {
 			link: [
-				//europe sans serif and monospaced
+				//noto sans, europe sans serif and monospaced
 				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap&subset=latin,latin-ext,cyrillic,greek,vietnamese'},//includes Hungarian, Polish, Turkish
 				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&display=swap&subset=latin'},
 
@@ -30,6 +30,16 @@ export default defineNuxtConfig({
 				//more
 				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap'},//Arabic
 				{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap'},//Devanagari (Hindi, Marathi, more)
+
+				//roboto for terms documents
+				{
+					rel: 'stylesheet',
+					href: 'https://fonts.googleapis.com/css2?' + (
+						'family=Roboto:ital,wght@0,400;1,400;0,500;1,500' +//note 500, tailwind semibold
+						'&display=swap' +
+						'&subset=latin,latin-ext'
+					),
+				},
 			],
 		},
 	},
