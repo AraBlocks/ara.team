@@ -18,31 +18,8 @@ and any other policies and notices listed below.
 </p>
 </div>
 
-<div class="
-h-[90svh]         /*height 90% of the smallest the viewport width can be*/
-overflow-x-auto   /*allow only horizontal scrolling*/
-overflow-y-hidden /*supress vertical overflow*/
-px-2 py-2         /*padding around scroll container*/
-
-text-gray-800 bg-gray-100 /*gray text and background colors*/
-text-sm                   /*tailwind's standard small but still readable text size*/
-font-roboto               /*vibe the user's Android phone ten years ago*/
-[&_a]:decoration-gray-500 /*subdued underline color for links*/
-[&_strong]:font-semibold  /*bold roboto is too bold; this brings in 500 not 700*/
-">
-<div class="
-h-full       /*make this inner div expand to fill the full height of the outer one above*/
-inline-block /*shrinkwrap to the needed width for columns*/
-
-columns-2                     /*at least two columns, never one, to indicate columns*/
-md:columns-[360px]            /*on medium desktop and wider, more columns around this width*/
-[column-fill:auto]            /*fill a column before spilling into the next one*/
-[&_a]:[word-break:break-word] /*don't let a long linked url make the columns wider*/
-
-gap-x-3       /*horizontal space between columns*/
-leading-tight /*no vertical space between lines in the same paragraph*/
-space-y-2     /*vertical space between headings and paragraphs in the text*/
-">
+<div class="h-[90svh] overflow-x-auto overflow-y-hidden px-2 py-2 text-gray-800 bg-gray-100 text-sm font-roboto [&_a]:decoration-gray-500 [&_strong]:font-semibold">
+<div class="h-full inline-block columns-2 md:columns-[360px] [column-fill:auto] [&_a]:[word-break:break-word] gap-x-3 leading-tight space-y-2">
 
 <p><a href="#terms">Terms and Conditions</a>,
 <a href="#privacy">Privacy Notice</a>,
