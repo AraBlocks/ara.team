@@ -43,4 +43,11 @@ export default defineNuxtConfig({
 			],
 		},
 	},
+	build: {
+		analyze: {//added for visualizer; enable Nuxt’s built-in analyzer, which uses Rollup Plugin Visualizer under the hood
+			template: 'treemap',//try out "sunburst", "treemap", "network", "raw-data", or "list"
+			brotliSize: true,//current browsers downloading from Cloudflare will use Brotli compression
+		},
+	},
+	analyzeDir: 'size',//added for visualizer; put the report files in a folder named "size" rather than .nuxt/analyze
 })

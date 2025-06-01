@@ -16,6 +16,7 @@ jspm_packages
 .nitro
 .cache
 dist
+size
 stats*.html
 
 #secrets
