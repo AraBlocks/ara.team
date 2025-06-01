@@ -13,8 +13,9 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	runtimeConfig: {//added for secrets like api keys; nuxt promises these will be available on the server side, and never exposed to a client
+	runtimeConfig: {//added for secrets like api keys
 
+		//nuxt promises these will be available on the server side, and never exposed to a client
 		ACCESS_OAUTH_GOOGLE_ID:      process.env.ACCESS_OAUTH_GOOGLE_ID,
 		ACCESS_OAUTH_GOOGLE_SECRET:  process.env.ACCESS_OAUTH_GOOGLE_SECRET,
 
@@ -26,6 +27,10 @@ export default defineNuxtConfig({
 
 		ACCESS_AUTHJS_SIGNING_KEY_SECRET: process.env.ACCESS_AUTHJS_SIGNING_KEY_SECRET,
 
+		//here is where you can set things that *can* be known to everyone, and need to be used in the page--be careful!
+		public: {
+			ACCESS_DOMAIN_PUBLIC: 'ara.team'//the domain name we're deploying all this to, so we don't have to repeat it everywhere
+		}
 	},
 	modules: [
 		'nitro-cloudflare-dev',
