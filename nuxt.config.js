@@ -6,7 +6,12 @@ export default defineNuxtConfig({
 		enabled: true,
 	},
 	nitro: {
-		preset: 'cloudflare-pages',
+		preset: 'cloudflare-pages',//from create cloudflare nuxt
+		esbuild: {
+			options: {
+				target: 'esnext',//added to solve error on yarn build about es2019 not allowing toplevel async; previously encountered previous error about es2019 not knowing about bigint literals
+			},
+		},
 	},
 	modules: [
 		'nitro-cloudflare-dev',
