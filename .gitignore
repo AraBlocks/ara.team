@@ -24,6 +24,7 @@ stats*.html
 .env.*
 *.env
 *.vars
+*.vars.*
 env.js
 card.js
 

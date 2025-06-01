@@ -1,4 +1,4 @@
-//this file is nuxt.config.ts
+//this file is nuxt.config.js
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	compatibilityDate: '2024-11-01',//from create cloudflare nuxt 
@@ -9,9 +9,23 @@ export default defineNuxtConfig({
 		preset: 'cloudflare-pages',//from create cloudflare nuxt
 		esbuild: {
 			options: {
-				target: 'esnext',//added to solve error on yarn build about es2019 not allowing toplevel async; previously encountered previous error about es2019 not knowing about bigint literals
+				target: 'esnext',
 			},
 		},
+	},
+	runtimeConfig: {//added for secrets like api keys; nuxt promises these will be available on the server side, and never exposed to a client
+
+		ACCESS_OAUTH_GOOGLE_ID:      process.env.ACCESS_OAUTH_GOOGLE_ID,
+		ACCESS_OAUTH_GOOGLE_SECRET:  process.env.ACCESS_OAUTH_GOOGLE_SECRET,
+
+		ACCESS_OAUTH_TWITTER_ID:     process.env.ACCESS_OAUTH_TWITTER_ID,
+		ACCESS_OAUTH_TWITTER_SECRET: process.env.ACCESS_OAUTH_TWITTER_SECRET,
+
+		ACCESS_OAUTH_GITHUB_ID:      process.env.ACCESS_OAUTH_GITHUB_ID,
+		ACCESS_OAUTH_GITHUB_SECRET:  process.env.ACCESS_OAUTH_GITHUB_SECRET,
+
+		ACCESS_AUTHJS_SIGNING_KEY_SECRET: process.env.ACCESS_AUTHJS_SIGNING_KEY_SECRET,
+
 	},
 	modules: [
 		'nitro-cloudflare-dev',

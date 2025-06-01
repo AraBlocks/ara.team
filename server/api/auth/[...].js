@@ -10,10 +10,11 @@ import discordProvider from '@auth/core/providers/discord'//more to do soon
 import twitchProvider  from '@auth/core/providers/twitch'
 import redditProvider  from '@auth/core/providers/reddit'
 
-async function getAccess() {//ttd june, placeholder
+async function getAccess() {//this placeholder function is async for when we must also decrypt secrets
+	const runtimeConfiguration = useRuntimeConfig()//this is how we have to get secrets through Nuxt
 	return {
 		get(key) {
-			return 'no value'
+			return runtimeConfiguration[key] ?? ''//get any existing key by name, or blank if missing
 		}
 	}
 }
@@ -23,8 +24,8 @@ export default async (event) => {//refactored from export default Auth
 
 	//google, uses Google’s OAuth 2.0 via OpenID Connect
 	const googleConfiguration = googleProvider({
-		clientId:     access.get('AUTH_GOOGLE_ID'),
-		clientSecret: access.get('AUTH_GOOGLE_SECRET'),
+		clientId:     access.get('ACCESS_OAUTH_GOOGLE_ID'),
+		clientSecret: access.get('ACCESS_OAUTH_GOOGLE_SECRET'),
 		//default minimal scopes to prove account ownership and get basic profile information
 	})
 	const googleProfile = googleConfiguration.profile//get Auth.js's default profile mapping function,
@@ -38,8 +39,8 @@ export default async (event) => {//refactored from export default Auth
 
 	//twitter, uses X API v2 via OAuth 2.0 (PKCE)
 	const twitterConfiguration = twitterProvider({
-		clientId:      access.get('AUTH_TWITTER_ID'),
-		clientSecret:  access.get('AUTH_TWITTER_SECRET'),
+		clientId:      access.get('ACCESS_OAUTH_TWITTER_ID'),
+		clientSecret:  access.get('ACCESS_OAUTH_TWITTER_SECRET'),
 		authorization: {params: {scope: 'users.read'}},//only request the minimal "users.read" scope; default is "users.read tweet.read offline.access" which would need more approval, and tell the user our site could see their tweets; this is the only provider where we are changing from Auth.js's default authorization scopes
 	})
 	const twitterProfile = twitterConfiguration.profile
@@ -53,8 +54,8 @@ export default async (event) => {//refactored from export default Auth
 
 	//github, uses GitHub’s OAuth 2.0 Web Application Flow
 	const githubConfiguration = githubProvider({
-		clientId:     access.get('AUTH_GITHUB_ID'),
-		clientSecret: access.get('AUTH_GITHUB_SECRET'),
+		clientId:     access.get('ACCESS_OAUTH_GITHUB_ID'),
+		clientSecret: access.get('ACCESS_OAUTH_GITHUB_SECRET'),
 	})
 	const githubProfile = githubConfiguration.profile
 	githubConfiguration.profile = async (raw) => { // custom mapping required to expose `login`
@@ -103,7 +104,7 @@ export default async (event) => {//refactored from export default Auth
 			maxAge: 240,//4 minutes in seconds, how long Auth.js’s cookie will last
 			updateAge: 0,// tell Auth.js to never refresh this cookie; it will expire naturally shortly
 		},
-		secret: access.get('AUTH_SECRET'),//Auth.js needs a random secret we define to sign things; it should be 32 bytes of random so like 64 base16 characters; and we don't have to rotate it
+		secret: access.get('ACCESS_AUTHJS_SIGNING_KEY_SECRET'),//Auth.js needs a random secret we define to sign things; we don't have to rotate it; generate with $ openssl rand -hex 32
 	})
 	return authHandler(event)//call the Auth.js handler we set up, giving it the event and returning its result
 }
