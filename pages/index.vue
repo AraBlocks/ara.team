@@ -31,7 +31,7 @@
 </div>
 
 <div class="break-inside-avoid mb-4 bg-white rounded border border-gray-200 shadow-sm p-4">
-<p>Liquidity mining runs <b>2021-July-24 00:00:00 UTC</b> through <b>2025-May-23</b></p>
+<p>Liquidity mining ran <b>2021-July-24 00:00:00 UTC</b> through <b>2025-May-23</b></p>
 <p>1 Get ARA in the <a href="https://arablocks.medium.com/ara-available-now-on-metamask-198ec078c997">🦊 MetaMask</a> mobile app;</p>
 
 <p>2 Pool ARA with USDC in <a href="https://app.sushi.com/analytics/pools/0x81ef0c70fa76c8e7563cb26ee34a2e7f2a77c410?chainId=1">🍣 SushiSwap</a> to get SLP;</p>
