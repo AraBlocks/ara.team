@@ -79,16 +79,23 @@ export default async (event) => {//refactored from export default Auth
 	const access = await getAccess()//because we can't get secrets synchronously
 	const settings = {
 
+		//google, https://console.cloud.google.com/apis/credentials
 		google: {//uses Google’s OAuth 2.0 via OpenID Connect
 			clientId: access.get('ACCESS_OAUTH_GOOGLE_ID'), clientSecret: access.get('ACCESS_OAUTH_GOOGLE_SECRET'),
 		},
+
+		//X, https://developer.x.com/en/portal/projects-and-apps
 		twitter: {//uses X API v2 via OAuth 2.0 (PKCE)
 			clientId: access.get('ACCESS_OAUTH_TWITTER_ID'), clientSecret: access.get('ACCESS_OAUTH_TWITTER_SECRET'),
 			authorization: {params: {scope: 'users.read'}},//only request the minimal "users.read" scope; default is "users.read tweet.read offline.access" which would need more approval, and tell the user our site could see their tweets
 		},
+
+		//github, github.com, Your Organizations, Settings, left bottom Developer settings, OAuth Apps
 		github: {//uses GitHub’s OAuth 2.0 Web Application Flow
 			clientId: access.get('ACCESS_OAUTH_GITHUB_ID'), clientSecret: access.get('ACCESS_OAUTH_GITHUB_SECRET'),
 		},
+
+		//discord, https://discord.com/developers/applications
 		discord: {//uses Discord’s OAuth2
 			clientId: access.get('ACCESS_OAUTH_DISCORD_ID'), clientSecret: access.get('ACCESS_OAUTH_DISCORD_SECRET'),
 		},
@@ -105,7 +112,9 @@ export default async (event) => {//refactored from export default Auth
 
 			//Auth calls this once after the person as the browser is back from the provider, and our server has proof they control a social media account
 			async jwt({token, profile, account}) {//token is the current JWT object, empty on first sign-in; profile is the normalized user profile Auth mapped from the raw JSON response from the provider, with our additions above
-				if (profile && account) proofHasArrived(token, profile, account)//check profile and account so our code runs only at the end of successful oauth flow, not on a session check or malicious hit to /api/auth/session
+				try {
+					if (profile && account) proofHasArrived(token, profile, account)//check profile and account so our code runs only at the end of successful oauth flow, not on a session check or malicious hit to /api/auth/session
+				} catch (e) { console.error(e) }//ttd june, hook this into datadog when you have that; here's another entrypoint from framework code to your code that you should isolate and protect in the normal way
 				return token//Auth expects our jwt() function to always return the token object it gives us
 			},
 			//ttd june, more common unhappy path is user says no to twitter, just closes the tab; be able to see those unfinished flows in the database as they will go 100% if the provider breaks or turns us off, too!
@@ -115,6 +124,8 @@ export default async (event) => {//refactored from export default Auth
 				url,//Auth gives us our callbackUrl from the starting link like "/api/auth/signin/twitter?callbackUrl=/whatever"
 				baseUrl,//and the domain of our own site, like "https://oursite.com"
 			}) {//return like "/done-page" and Auth will use this in the finishing 302 redirect that exits the user finishing the flow
+				try {
+				} catch (e) { console.error(e) }//ttd june, another entry point to catch
 				return '/oauth2'//ttd june, first just send them to the example you're done page
 			},
 		},
@@ -291,8 +302,8 @@ a second GET uses ACCESS_TOKEN to get information about the Twitter user
 	{
 		"data": {
 			"id": "123456789",
-			"name": "Bill Gates",
-			"username": "billgates"
+			"name": "Jane Doe",
+			"username": "janedoe"
 		}
 	}
 

@@ -1,6 +1,16 @@
 <script setup>
 //this file is index.vue
 
+/*
+prove to google that dashboard me also controls the home page so they let us use oauth
+https://console.cloud.google.com/apis/credentials
+https://search.google.com/search-console/not-verified
+https://support.google.com/webmasters/answer/9008080#meta_tag_verification
+*/
+useSeoMeta({
+	googleSiteVerification: '_QVRB2Q1vXow6EkXoTMWm1AAZN-mOLJRwPx8g8YolU4',
+})
+
 </script>
 <template>
 <div class="p-4 columns-1 lg:columns-2 xl:columns-3" style="column-gap: 1rem;">
