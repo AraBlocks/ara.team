@@ -6,8 +6,7 @@ import {Auth} from '@auth/core'//using the core inside Auth.js directly; https:/
 import googleProvider  from '@auth/core/providers/google'
 import twitterProvider from "@auth/core/providers/twitter"//𝕏, of course, but Auth.js still calls it twitter
 import githubProvider  from '@auth/core/providers/github'
-
-import discordProvider from '@auth/core/providers/discord'//more to do soon
+import discordProvider from '@auth/core/providers/discord'
 import twitchProvider  from '@auth/core/providers/twitch'
 import redditProvider  from '@auth/core/providers/reddit'
 
@@ -22,7 +21,7 @@ whether they use oauth v1 or 2, and PKCS, and so on
 | __| '_ \ / _ \ | __| '__/ _` | | | | '_ \ / _ \ '__/ _ \
 | |_| | | |  __/ | |_| | | (_| | | | | | | |  __/ | |  __/
  \__|_| |_|\___|  \__|_|  \__,_|_|_| |_| |_|\___|_|  \___|
-                                                          
+																													
 a long trail led to @auth/core...
 (1) there are turnkey identity providers like auth0.com
 but a service provider can become slow, unreliable, expensive,
@@ -67,74 +66,56 @@ in researching this now, also found this similar rant:
 https://www.better-auth.com/docs/comparison
 */
 
+function includeResponse(configuration) {//takes a provider-specific Auth.js configuration object
+	let profileFunction = configuration.profile//saves the reference to Auth's response parsing function
+	configuration.profile = async (response) => {//to replace it with this one
+		let pulled = await profileFunction(response)//which starts out by calling it to get .id .name .email and .image
+		return {...pulled, response}//and alongside those, also includes the response body from the provider
+	}
+	return configuration
+}
+
 export default async (event) => {//refactored from export default Auth
 	const access = await getAccess()//because we can't get secrets synchronously
+	const settings = {
 
-	//google, uses Google’s OAuth 2.0 via OpenID Connect
-	const googleConfiguration = googleProvider({
-		clientId:     access.get('ACCESS_OAUTH_GOOGLE_ID'),
-		clientSecret: access.get('ACCESS_OAUTH_GOOGLE_SECRET'),
-		//default minimal scopes to prove account ownership and get basic profile information
-	})
-	const googleProfile = googleConfiguration.profile//get Auth.js's default profile mapping function,
-	googleConfiguration.profile = async (raw) => {//to get the raw response from Google's OAuth API,
-		let user = await googleProfile(raw)//call Auth.js's profile mapping function for google
-		return {
-			...user,//include all the properties Auth.js knew to pull from the google oauth response
-			email_verified: raw.email_verified,//and also add this extra one we want so it will also be in the profile object below
-		}
+		google: {//uses Google’s OAuth 2.0 via OpenID Connect
+			clientId: access.get('ACCESS_OAUTH_GOOGLE_ID'), clientSecret: access.get('ACCESS_OAUTH_GOOGLE_SECRET'),
+		},
+		twitter: {//uses X API v2 via OAuth 2.0 (PKCE)
+			clientId: access.get('ACCESS_OAUTH_TWITTER_ID'), clientSecret: access.get('ACCESS_OAUTH_TWITTER_SECRET'),
+			authorization: {params: {scope: 'users.read'}},//only request the minimal "users.read" scope; default is "users.read tweet.read offline.access" which would need more approval, and tell the user our site could see their tweets
+		},
+		github: {//uses GitHub’s OAuth 2.0 Web Application Flow
+			clientId: access.get('ACCESS_OAUTH_GITHUB_ID'), clientSecret: access.get('ACCESS_OAUTH_GITHUB_SECRET'),
+		},
+		discord: {//uses Discord’s OAuth2
+			clientId: access.get('ACCESS_OAUTH_DISCORD_ID'), clientSecret: access.get('ACCESS_OAUTH_DISCORD_SECRET'),
+		},
 	}
 
-	//twitter, uses X API v2 via OAuth 2.0 (PKCE)
-	const twitterConfiguration = twitterProvider({
-		clientId:      access.get('ACCESS_OAUTH_TWITTER_ID'),
-		clientSecret:  access.get('ACCESS_OAUTH_TWITTER_SECRET'),
-		authorization: {params: {scope: 'users.read'}},//only request the minimal "users.read" scope; default is "users.read tweet.read offline.access" which would need more approval, and tell the user our site could see their tweets; this is the only provider where we are changing from Auth.js's default authorization scopes
-	})
-	const twitterProfile = twitterConfiguration.profile
-	twitterConfiguration.profile = async (raw) => {
-		let user = await twitterProfile(raw)
-		return {
-			...user,
-			username: raw.data.username,//twitter keeps the route-style name like "billgates" here; profile.name is "Bill Gates"
-		}
-	}
-
-	//github, uses GitHub’s OAuth 2.0 Web Application Flow
-	const githubConfiguration = githubProvider({
-		clientId:     access.get('ACCESS_OAUTH_GITHUB_ID'),
-		clientSecret: access.get('ACCESS_OAUTH_GITHUB_SECRET'),
-	})
-	const githubProfile = githubConfiguration.profile
-	githubConfiguration.profile = async (raw) => { // custom mapping required to expose `login`
-		const user = await githubProfile(raw);
-		return {
-			...user,
-			login: raw.login//"billgates" github calls this your login, uses it in routes, profile.name can have spaces
-		}
-	}
-
-	const authHandler = Auth({//set up the Auth.js handler, getting the function that knows how to handle oauth web requests
+	const authHandler = Auth({//set up the Auth handler, getting the function that knows how to handle oauth web requests
 		providers: [
-			googleConfiguration,
-			twitterConfiguration,
-			githubConfiguration,
+			includeResponse(googleProvider(settings.google)),
+			includeResponse(twitterProvider(settings.twitter)),
+			includeResponse(githubProvider(settings.github)),
+			includeResponse(discordProvider(settings.discord)),//for each of these, we call Auth's function to turn the settings for this provider we prepared into a configuration object, and then use our helper function to augment the profile function with one that also includes the raw response body from the provider
 		],
 		callbacks: {
 
-			//Auth.js calls this once after the person as the browser is back from the provider, and our server has proof they control a social media account
-			async jwt({token, profile, account}) {//token is the current JWT object, empty on first sign-in; profile is the normalized user profile Auth.js mapped from the raw JSON response from the provider, with our additions above
+			//Auth calls this once after the person as the browser is back from the provider, and our server has proof they control a social media account
+			async jwt({token, profile, account}) {//token is the current JWT object, empty on first sign-in; profile is the normalized user profile Auth mapped from the raw JSON response from the provider, with our additions above
 				if (profile && account) proofHasArrived(token, profile, account)//check profile and account so our code runs only at the end of successful oauth flow, not on a session check or malicious hit to /api/auth/session
-				return token//Auth.js expects our jwt() function to always return the token object it gives us
+				return token//Auth expects our jwt() function to always return the token object it gives us
 			},
 			//ttd june, more common unhappy path is user says no to twitter, just closes the tab; be able to see those unfinished flows in the database as they will go 100% if the provider breaks or turns us off, too!
 
-			//Auth.js calls this right afterwards asking us where we should send the user who is finished
+			//Auth calls this right afterwards asking us where we should send the user who is finished
 			async redirect({
-				url,//Auth.js gives us our callbackUrl from the starting link like "/api/auth/signin/twitter?callbackUrl=/whatever"
+				url,//Auth gives us our callbackUrl from the starting link like "/api/auth/signin/twitter?callbackUrl=/whatever"
 				baseUrl,//and the domain of our own site, like "https://oursite.com"
-			}) {//return like "/done" and Auth.js will use this in the finishing 302 redirect that exits the user finishing the flow
-				return '/app'
+			}) {//return like "/done-page" and Auth will use this in the finishing 302 redirect that exits the user finishing the flow
+				return '/oauth2'//ttd june, first just send them to the example you're done page
 			},
 		},
 
@@ -168,27 +149,48 @@ export default async (event) => {//refactored from export default Auth
 	return authHandler(event)//call the Auth.js handler we set up, giving it the event and returning its result
 }
 
-//when code reaches here, the person at the browser connected to our server is signed into google, has told google they want to use their google account with our site, and auth.js running on our server has confirmed all of this is correct with google
+//when code reaches here, the person at the browser connected to our server is signed into google, has told google they want to use their google account with our site, and Auth running on our server has confirmed all of this is correct with google
 function proofHasArrived(token, profile, account) {
 
-	account.provider//will be like "google" or "twitter"
+	if (account.provider == 'google') {
 
-	//these four auth core normalizes and includes, although some can still be null some times
-	profile.id//should be the id set by the provider for this user that doesn't change, even if the user changes their info there
-	profile.name//user name
-	profile.email//email, if the user has one with this provider
-	profile.image//url to avatar image, but we're not going to use this
+		profile.id//like "108691239685192314259" from response.sub
+		profile.name//like "Jane Doe" from response.name
+		//no handle
+		profile.email//like "jane.doe@gmail.com" from response.email
+		profile.emailVerified = profile.response.email_verified//the user has verified their email address
 
-	//beyond that are the extra and custom ones we pulled out of the raw responses above
-	profile.email_verified//true if google, and user has email there, and user verified that email with google
-	profile.username//twitter's simpler route-style name, "billgates" rather than profile.name "Bill Gates"
+	} else if (account.provider == 'twitter') {
 
-	/*
+		profile.id//like "2244994945" from response.data.id
+		profile.name//like "Jane Doe" from response.data.name
+		profile.handle = profile.username//like "janedoe_123" from response.data.username
+		//no email
+		//no email verified
+
+	} else if (account.provider == 'github') {
+
+		profile.id//like 9837451 from response.id
+		profile.name//like "Jane Doe" from response.name
+		profile.handle=profile.login//profile.login was pulled from response.login, e.g. "janedoe"
+		profile.email//like "9837451+janedoe@users.noreply.github.com" from response.email; often a disposable forwarding address if the user at github has chosen keep my email private
+		//no email verified
+
+	} else if (account.provider == 'discord') {
+
+		profile.id//like "80351110224678912" from response.id
+		profile.name//like "JaneDoe" from response.username
+		profile.handle = `${profile.username}#${profile.response.discriminator}`//like "JaneDoe#8890"
+		profile.email//like "jane.doe@gmail.com" from response.email
+		profile.emailVerified = profile.response.verified//true if Discord has verified their email
+	}
+
+	/*ttd june
 	At this point:
 	1) Look up or create your own User in the database.
 	2) Issue your own long-lived session cookie or JWT for your application.
 	3) Redirect the browser back into your app’s UI.
-	Auth.js’s cookie will expire on its own in 4 minutes, and you never call /api/auth/session,
+	Auth.js’s cookie will expire on its own in 15 minutes, and you never call /api/auth/session,
 	so Auth.js won’t attempt any further validations.
 	*/
 }
@@ -208,7 +210,7 @@ async function getAccess() {//ttd june, this placeholder function is async for w
 | '_ \ / _ \ \ /\ / / | | | |/ _ \| | | | __| '_ \  \ \ /\ / / _ \| '__| |/ / __|
 | | | | (_) \ V  V /  | |_| / ___ \ |_| | |_| | | |  \ V  V / (_) | |  |   <\__ \
 |_| |_|\___/ \_/\_/    \___/_/   \_\__,_|\__|_| |_|   \_/\_/ \___/|_|  |_|\_\___/
-                                                                                 
+																																								 
 
 (1) user starts out on our page to sign up or sign in
 user clicks "Continue with Twitter"
