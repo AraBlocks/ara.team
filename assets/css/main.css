@@ -19,12 +19,6 @@
 	code, pre {
 		@apply font-mono text-gray-700;
 	}
-	/*
-	should not be necessary, but here's how to explicitly ensure form controls inherit the font
-	button, input, textarea, select {
-		font: inherit;
-	}
-	*/
 	a {
 		@apply underline text-gray-700;
 	}

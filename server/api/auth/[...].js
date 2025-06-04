@@ -128,7 +128,7 @@ export default async (event) => {//refactored from export default Auth
 			}) {//return like "/done-page" and Auth will use this in the finishing 302 redirect that exits the user finishing the flow
 				try {
 				} catch (e) { console.error(e) }//ttd june, another entry point to catch
-				return '/oauth2'//ttd june, first just send them to the example you're done page
+				return '/oauth-done'//ttd june, first just send them to the example you're done page
 			},
 		},
 
