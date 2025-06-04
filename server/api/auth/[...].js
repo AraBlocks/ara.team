@@ -157,32 +157,34 @@ function proofHasArrived(token, profile, account) {
 		profile.id//like "108691239685192314259" from response.sub
 		profile.name//like "Jane Doe" from response.name
 		//no handle
+
 		profile.email//like "jane.doe@gmail.com" from response.email
-		profile.emailVerified = profile.response.email_verified//the user has verified their email address
+		profile.emailVerified = profile.response.email_verified//gmail means almost always true
 
 	} else if (account.provider == 'twitter') {
 
 		profile.id//like "2244994945" from response.data.id
 		profile.name//like "Jane Doe" from response.data.name
 		profile.handle = profile.username//like "janedoe_123" from response.data.username
+
 		//no email
-		//no email verified
 
 	} else if (account.provider == 'github') {
 
 		profile.id//like 9837451 from response.id
 		profile.name//like "Jane Doe" from response.name
-		profile.handle=profile.login//profile.login was pulled from response.login, e.g. "janedoe"
-		profile.email//like "9837451+janedoe@users.noreply.github.com" from response.email; often a disposable forwarding address if the user at github has chosen keep my email private
-		//no email verified
+		profile.handle = profile.login//profile.login was pulled from response.login, e.g. "janedoe"
+
+		profile.email//like "9837451+janedoe@users.noreply.github.com" from response.email; often a disposable forwarding address if the user at github has chosen keep my email private; no email verified
 
 	} else if (account.provider == 'discord') {
 
 		profile.id//like "80351110224678912" from response.id
 		profile.name//like "JaneDoe" from response.username
 		profile.handle = `${profile.username}#${profile.response.discriminator}`//like "JaneDoe#8890"
+
 		profile.email//like "jane.doe@gmail.com" from response.email
-		profile.emailVerified = profile.response.verified//true if Discord has verified their email
+		profile.emailVerified = profile.response.verified//true if user has verified email with discord
 	}
 
 	/*ttd june
