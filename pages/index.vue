@@ -93,7 +93,8 @@ useSeoMeta({
 <NuxtLink to="/terms">Terms and Conditions</NuxtLink>{{' '}}
 <NuxtLink to="/terms#privacy">Privacy Notice</NuxtLink>{{' '}}
 <NuxtLink to="/terms#cookies">Cookie Info</NuxtLink>{{' '}}
-<NuxtLink to="/terms#sms">SMS and MMS Terms</NuxtLink>
+<NuxtLink to="/terms#sms">SMS and MMS Terms</NuxtLink>{{' '}}
+<NuxtLink to="/oauth-start">🚧 OAuth</NuxtLink>{{' '}}
 </p>
 </div>
 	

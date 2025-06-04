@@ -81,6 +81,7 @@ export default async (event) => {//refactored from export default Auth
 
 		//google, https://console.cloud.google.com/apis/credentials
 		//also must verify site ownership, https://search.google.com/search-console/ownership
+		//and google deletes if no activity for 6 months, https://support.google.com/cloud/answer/15549257#unused-client-deletion
 		google: {//uses Google’s OAuth 2.0 via OpenID Connect
 			clientId: access.get('ACCESS_OAUTH_GOOGLE_ID'), clientSecret: access.get('ACCESS_OAUTH_GOOGLE_SECRET'),
 		},
