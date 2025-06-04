@@ -80,6 +80,7 @@ export default async (event) => {//refactored from export default Auth
 	const settings = {
 
 		//google, https://console.cloud.google.com/apis/credentials
+		//also must verify site ownership, https://search.google.com/search-console/ownership
 		google: {//uses Google’s OAuth 2.0 via OpenID Connect
 			clientId: access.get('ACCESS_OAUTH_GOOGLE_ID'), clientSecret: access.get('ACCESS_OAUTH_GOOGLE_SECRET'),
 		},

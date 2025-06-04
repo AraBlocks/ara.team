@@ -6,6 +6,7 @@ prove to google that dashboard me also controls the home page so they let us use
 https://console.cloud.google.com/apis/credentials
 https://search.google.com/search-console/not-verified
 https://support.google.com/webmasters/answer/9008080#meta_tag_verification
+https://search.google.com/search-console/ownership
 */
 useSeoMeta({
 	googleSiteVerification: '_QVRB2Q1vXow6EkXoTMWm1AAZN-mOLJRwPx8g8YolU4',
