@@ -112,8 +112,34 @@ export default async (event) => {//refactored from export default Auth
 		],
 		callbacks: {
 
+			async signIn({account, profile}) {//Auth calls our signIn() method once when the user and Auth have finished successfully with the third-party provider
+				let destination = '/oauth-done'
+				try {
+
+					proofHasArrived(account, profile)
+
+					let message = {
+						provider: account.provider,
+
+						id: profile.id,
+						name: profile.name,
+						handle: profile.handle,
+						email: profile.email,
+						emailVerified: profile.emailVerified,
+
+						response: profile.response,//also let's see the whole thing; ttd june, just for the local sanity check
+					}
+					destination += '?message=' + encodeURIComponent(JSON.stringify(message))
+
+				} catch (e) { console.error(e) }
+				return destination
+			}
+
+			/*
+			ttd june, i think we don't need any of this anymore
+
 			//Auth calls this once after the person as the browser is back from the provider, and our server has proof they control a social media account
-			async jwt({token, profile, account}) {//token is the current JWT object, empty on first sign-in; profile is the normalized user profile Auth mapped from the raw JSON response from the provider, with our additions above
+			async jwt({account, profile, token}) {//token is the current JWT object, empty on first sign-in; profile is the normalized user profile Auth mapped from the raw JSON response from the provider, with our additions above
 				try {
 					if (profile && account) proofHasArrived(token, profile, account)//check profile and account so our code runs only at the end of successful oauth flow, not on a session check or malicious hit to /api/auth/session
 				} catch (e) { console.error(e) }//ttd june, hook this into datadog when you have that; here's another entrypoint from framework code to your code that you should isolate and protect in the normal way
@@ -121,29 +147,29 @@ export default async (event) => {//refactored from export default Auth
 			},
 			//ttd june, more common unhappy path is user says no to twitter, just closes the tab; be able to see those unfinished flows in the database as they will go 100% if the provider breaks or turns us off, too!
 
+			//ttd june, signIn lets us look at the profile object and return a redirect route; won't need this later, probably
+
+			/* ttd june, to get details on the query string, we're using signIn(), and don't need redirect()
 			//Auth calls this right afterwards asking us where we should send the user who is finished
 			async redirect({
 				url,//Auth gives us our callbackUrl from the starting link like "/api/auth/signin/twitter?callbackUrl=/whatever"
 				baseUrl,//and the domain of our own site, like "https://oursite.com"
 			}) {//return like "/done-page" and Auth will use this in the finishing 302 redirect that exits the user finishing the flow
-				try {
-				} catch (e) { console.error(e) }//ttd june, another entry point to catch
-				return '/oauth-done'//ttd june, first just send them to the example you're done page
+				return '/oauth-done'
 			},
+			*/
 		},
 
 		/*
-		Auth.js uses an essential cookie 🍪 to store and verify the OAuth handshake
+		Auth.js uses essential cookies 🍪 to carry necessary state through the different steps of OAuth
 		when twitter or whatever provider redirects back to /api/auth/callback,
 		Auth.js writes a signed session token into this cookie so that it can confirm,
 		here on the server, which user just authenticated
 
-		if we were using Auth.js for all our user identity and browser session management,
-		we'd keep this cookie around, and update it, but as we're only using Auth.js to let people prove
-		they are billgates at twitter, or whatever, we don't need it after the oauth flow is done
-
-		but we set its expiration to 4 minutes, rather than zero, just in case zero might mess something up
-		with some provider now, or cause an error later, if a provider changes something on their end
+		Auth's intent is that then we'll use this cookie to identify the user long term, but we don't
+		so, we set its expiration to 15 minutes, matching the cookies Auth uses just for the handshake
+		why not zero? just in case zero might mess something up with some provider now,
+		or cause an error later, if a provider changes something on their end
 		those kinds of errors can be really hard to identify and diagnose
 
 		by default, Auth.js sets these secure attributes on its cookie
@@ -154,8 +180,8 @@ export default async (event) => {//refactored from export default Auth
 		Domain:    (omitted)  defaults to the exact host serving it; third‐party domains cannot read or send it
 		*/
 		session: {
-			maxAge: 900,//15 minutes in seconds, how long Auth.js’s cookie will last
-			updateAge: 0,// tell Auth.js to never refresh this cookie; it will expire naturally shortly
+			maxAge: 900,//15 minutes in seconds; intending us to identify our user with this cookie, Auth's default is 30 days
+			updateAge: 0,//tell Auth.js to never refresh this cookie; it will expire naturally shortly
 		},
 		secret: access.get('ACCESS_AUTHJS_SIGNING_KEY_SECRET'),//Auth.js needs a random secret we define to sign things; we don't have to rotate it; generate with $ openssl rand -hex 32
 	})
@@ -163,7 +189,8 @@ export default async (event) => {//refactored from export default Auth
 }
 
 //when code reaches here, the person at the browser connected to our server is signed into google, has told google they want to use their google account with our site, and Auth running on our server has confirmed all of this is correct with google
-function proofHasArrived(token, profile, account) {
+function proofHasArrived(account, profile) {
+	console.log('proof has arrived ✉️', JSON.stringify({account, profile}))//ttd june, stringify to avoid [Object object]
 
 	if (account.provider == 'google') {
 
@@ -199,15 +226,6 @@ function proofHasArrived(token, profile, account) {
 		profile.email//like "jane.doe@gmail.com" from response.email
 		profile.emailVerified = profile.response.verified//true if user has verified email with discord
 	}
-
-	/*ttd june
-	At this point:
-	1) Look up or create your own User in the database.
-	2) Issue your own long-lived session cookie or JWT for your application.
-	3) Redirect the browser back into your app’s UI.
-	Auth.js’s cookie will expire on its own in 15 minutes, and you never call /api/auth/session,
-	so Auth.js won’t attempt any further validations.
-	*/
 }
 
 async function getAccess() {//ttd june, this placeholder function is async for when we must also decrypt secrets
