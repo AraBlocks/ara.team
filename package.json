@@ -30,6 +30,7 @@
 		"@cloudflare/workers-types": "^4.20250224.0",
 		"@nuxtjs/tailwindcss": "^6.13.1",
 		"nitro-cloudflare-dev": "^0.2.1",
+		"nuxi": "^3.25.1",
 		"wrangler": "^3.109.3"
 	}
 }

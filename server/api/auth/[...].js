@@ -1,6 +1,8 @@
 //this file is ./server/api/auth/[...].js
 //the ellipsis is Nuxt's way of registering this to handle both /api/auth/something and /api/auth/something/deeper routes
 
+import {fromNodeMiddleware} from 'h3'
+
 import {Auth} from '@auth/core'//using the core inside Auth.js directly; https://authjs.dev/getting-started
 
 import googleProvider  from '@auth/core/providers/google'
@@ -19,16 +21,8 @@ function includeResponse(configuration) {//takes a provider-specific Auth.js con
 	return configuration
 }
 
-/*
-ttd june, lots of difficulty trying to make the handler async
-and not sure if it's because of the async pattern, or because there's some deeper incompatibility between auth core and the serverless nuxt stack
-next thing to try: abandon the async handler, and try just getting it working
-this will create a problem to solve later related to how you get your secrets
-but at least you'll be able to tell if you can get oauth working this way, at all
-*/
-
-export default defineEventHandler(async (event) => {//refactored from export default Auth
-	const access = await getAccess()//because we can't get secrets synchronously
+export default fromNodeMiddleware((req, res) => {
+	const access = getAccess()
 	const settings = {
 
 		//google, https://console.cloud.google.com/apis/credentials
@@ -56,14 +50,6 @@ export default defineEventHandler(async (event) => {//refactored from export def
 	}
 
 	const config = {
-
-		logger: {//provide three methods Auth expects so its setLogger() won't throw
-			debug: console.debug.bind(console),
-			warn:  console.warn.bind(console),
-			error: console.error.bind(console),
-		},
-
-		baseUrl: 'http://localhost:3000',//added to try to resolve invalid URL error
 
 		providers: [
 			includeResponse(googleProvider(settings.google)),
@@ -98,21 +84,9 @@ export default defineEventHandler(async (event) => {//refactored from export def
 		},
 
 		secret: access.get('ACCESS_AUTHJS_SIGNING_KEY_SECRET'),//Auth.js needs a random secret we define to sign things; we don't have to rotate it; generate with $ openssl rand -hex 32
-
 	}
 
-	// 3) For debugging: confirm `logger` is actually present
-	console.log('Auth.js config keys:', Object.keys(config))
-	// Should log: ["logger","providers","callbacks","session","secret"]
-
-	// 4) Wrap `Auth(request, response, config)` using H3’s fromNodeMiddleware.
-	//    This turns Auth’s Node-style middleware into a proper H3 event handler.
-	console.log('should be a function:', typeof fromNodeMiddleware)
-	const h3Compatible = fromNodeMiddleware((req, res) => Auth(req, res, config))
-
-	// 5) Finally, invoke that wrapped handler with this incoming event.
-	//    Under the hood, H3 will extract `event.node.req` / `event.node.res` for you.
-	return h3Compatible(event)
+	return Auth(req, res, config)
 })
 
 //when code reaches here, the person at the browser connected to our server is signed into google, has told google they want to use their google account with our site, and Auth running on our server has confirmed all of this is correct with google
@@ -155,7 +129,7 @@ function proofHasArrived(account, profile) {
 	}
 }
 
-async function getAccess() {//ttd june, this placeholder function is async for when we must also decrypt secrets
+function getAccess() {//ttd june, this placeholder function is async for when we must also decrypt secrets
 	const runtimeConfiguration = useRuntimeConfig()//this is how we have to get secrets through Nuxt
 	return {
 		get(key) {
