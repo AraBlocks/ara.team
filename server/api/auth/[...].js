@@ -14,9 +14,9 @@ import redditProvider  from '@auth/core/providers/reddit'
 
 function includeResponse(configuration) {//takes a provider-specific Auth.js configuration object
 	let profileFunction = configuration.profile//saves the reference to Auth's response parsing function
-	configuration.profile = async (response) => {//to replace it with this one
-		let pulled = await profileFunction(response)//which starts out by calling it to get .id .name .email and .image
-		return {...pulled, response}//and alongside those, also includes the response body from the provider
+	configuration.profile = async (...a) => {//to replace it with this one
+		let pulled = await profileFunction(...a)//which starts out by calling it to get .id .name .email and .image
+		return {...pulled, response: a[0]}//and alongside those, also includes the response body from the provider, which is the first argument
 	}
 	return configuration
 }
