@@ -1,6 +1,6 @@
 <script setup>//in the [ara.team] [Nuxt] repo, this is the file ./pages/oauth-start.vue
 
-const cloud = true ? 'https://oauth2.ara.team' : 'http://localhost:5173'
+const cloud = false ? 'https://oauth2.ara.team' : 'http://localhost:5173'
 
 </script>
 <template>
